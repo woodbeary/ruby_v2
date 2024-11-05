@@ -1,0 +1,26 @@
+<div class="min-h-screen bg-gray-100">
+  <div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
+    <div class="bg-white rounded-lg shadow-lg p-6">
+      <h1 class="text-3xl font-bold text-gray-900 mb-4">
+        Welcome to Hotwire Demo
+      </h1>
+      
+      <p class="text-gray-600 mb-4">
+        This is a sample page using Tailwind CSS and Hotwire
+      </p>
+
+      <%= turbo_frame_tag "counter" do %>
+        <div class="bg-gray-50 p-4 rounded-md">
+          <p class="text-lg font-semibold text-gray-700">
+            Click count: <span id="click-count">0</span>
+          </p>
+          
+          <%= button_to "Increment",
+                        increment_count_path,
+                        class: "mt-2 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition-colors",
+                        data: { turbo_frame: "counter" } if defined?(increment_count_path) %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div> 
