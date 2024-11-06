@@ -17,4 +17,14 @@ services:
           name: railsllm-postgresql
           property: connectionString
       - key: RAILS_MASTER_KEY
-        sync: false 
+        sync: false
+      - key: REDIS_URL
+        fromService:
+          type: redis
+          name: cache
+          property: connectionString
+
+  - type: redis
+    name: cache
+    ipAllowList: [] # only allow internal connections
+    plan: free # or choose appropriate plan
