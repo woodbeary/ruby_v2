@@ -30,7 +30,3 @@ test:
 production:
   <<: *default
   url: <%= ENV['DATABASE_URL'] %>
-  prepare: false
-  connect_timeout: 2
-  variables:
-    statement_timeout: 5000

@@ -1,14 +1,12 @@
 databases:
   - name: railsllm-postgresql
-    databaseName: railsllm_production
+    databaseName: railsllm
     user: railsllm
-    plan: free
 
 services:
   - type: web
     name: railsllm
     env: ruby
-    plan: free
     buildCommand: "./bin/render-build.sh"
     startCommand: "bundle exec puma -C config/puma.rb"
     envVars:
@@ -17,6 +15,4 @@ services:
           name: railsllm-postgresql
           property: connectionString
       - key: RAILS_MASTER_KEY
-        sync: false
-      - key: RAILS_ENV
-        value: production
+        sync: false 
