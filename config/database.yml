@@ -29,4 +29,8 @@ test:
 # ensure the database is located in a persisted volume.
 production:
   <<: *default
-  # database: path/to/persistent/storage/production.sqlite3
+  url: <%= ENV['DATABASE_URL'] %>
+  prepare: false
+  connect_timeout: 2
+  variables:
+    statement_timeout: 5000
