@@ -1,0 +1,46 @@
+<div class="fixed inset-0 bg-gray-500 bg-opacity-75 flex items-center justify-center">
+  <div class="bg-white rounded-lg p-8 max-w-md w-full">
+    <h2 class="text-2xl font-bold mb-4">Priority Recommendation</h2>
+    
+    <div class="mb-6">
+      <p class="text-gray-600">Based on our analysis, we recommend:</p>
+      <p class="text-2xl font-bold text-center my-4">
+        <%= case recommended_priority
+            when 'P1' then 'P1 - Critical (System Down)'
+            when 'P2' then 'P2 - High (Major Impact)'
+            when 'P3' then 'P3 - Medium (Limited Impact)'
+            when 'P4' then 'P4 - Low (Minor Issue)'
+            end %>
+      </p>
+      <div class="bg-gray-50 p-4 rounded-lg mt-4">
+        <h3 class="font-medium text-gray-700 mb-2">Priority Level Guide:</h3>
+        <ul class="text-sm text-gray-600 space-y-1">
+          <li><strong>P1 - Critical:</strong> System-wide outages or blocking issues affecting all users</li>
+          <li><strong>P2 - High:</strong> Major functionality broken or significant user impact</li>
+          <li><strong>P3 - Medium:</strong> Partial service disruption or affecting some users</li>
+          <li><strong>P4 - Low:</strong> Minor issues, cosmetic problems, or minimal impact</li>
+        </ul>
+      </div>
+      <p class="text-gray-600 mt-4">Choose how to proceed:</p>
+    </div>
+
+    <div class="flex flex-col space-y-2">
+      <%= button_to "Use Recommended", 
+          update_priority_incident_path(incident),
+          method: :patch,
+          params: { priority: recommended_priority },
+          class: "w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" %>
+          
+      <%= button_to "Keep Original", 
+          update_priority_incident_path(incident), 
+          method: :patch,
+          params: { priority: incident.priority },
+          class: "w-full bg-white border border-gray-300 hover:bg-gray-50 text-gray-700 font-medium py-2 px-4 rounded" %>
+
+      <%= link_to "Choose Different Priority", 
+          edit_incident_path(incident),
+          data: { turbo_frame: "modal" },
+          class: "w-full text-center bg-gray-100 hover:bg-gray-200 text-gray-600 font-medium py-2 px-4 rounded" %>
+    </div>
+  </div>
+</div> 

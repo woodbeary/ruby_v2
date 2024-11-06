@@ -1,0 +1,43 @@
+<tr id="<%= dom_id incident %>">
+  <td class="px-6 py-4 whitespace-nowrap">
+    <%= link_to incident.title, incident_path(incident), class: "text-blue-600 hover:text-blue-900" %>
+  </td>
+  <td class="px-6 py-4 whitespace-nowrap">
+    <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full 
+                 <%= incident.priority == 'P1' ? 'bg-red-100 text-red-800' : 
+                     incident.priority == 'P2' ? 'bg-orange-100 text-orange-800' :
+                     incident.priority == 'P3' ? 'bg-yellow-100 text-yellow-800' :
+                     incident.priority == 'P4' ? 'bg-green-100 text-green-800' :
+                     'bg-blue-100 text-blue-800' %>">
+      <%= case incident.priority
+          when 'P1' then 'P1 - Critical'
+          when 'P2' then 'P2 - High'
+          when 'P3' then 'P3 - Medium'
+          when 'P4' then 'P4 - Low'
+          end %>
+    </span>
+  </td>
+  <td class="px-6 py-4 whitespace-nowrap">
+    <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full
+                 <%= incident.status == 'open' ? 'bg-green-100 text-green-800' : 'bg-gray-100 text-gray-800' %>">
+      <%= incident.status %>
+    </span>
+  </td>
+  <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+    <%= link_to "Edit", edit_incident_path(incident), 
+        class: "text-indigo-600 hover:text-indigo-900",
+        data: { 
+          turbo_frame: "modal",
+          controller: "incident-actions",
+          log_message: "✏️ Opening edit form for incident ##{incident.id}"
+        } %>
+    <%= link_to "Delete", incident_path(incident), 
+        data: { 
+          turbo_method: :delete, 
+          turbo_confirm: "Are you sure?",
+          controller: "incident-actions",
+          log_message: "🗑️ Requesting deletion of incident ##{incident.id}"
+        },
+        class: "ml-2 text-red-600 hover:text-red-900" %>
+  </td>
+</tr> 

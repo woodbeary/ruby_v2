@@ -1,0 +1,52 @@
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+  <div class="bg-white shadow overflow-hidden sm:rounded-lg">
+    <div class="px-4 py-5 sm:px-6">
+      <h3 class="text-lg leading-6 font-medium text-gray-900">
+        <%= @incident.title %>
+      </h3>
+    </div>
+    <div class="border-t border-gray-200 px-4 py-5 sm:px-6">
+      <dl class="grid grid-cols-1 gap-x-4 gap-y-8 sm:grid-cols-2">
+        <div class="sm:col-span-1">
+          <dt class="text-sm font-medium text-gray-500">Priority</dt>
+          <dd class="mt-1 text-sm text-gray-900">
+            <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full
+                       <%= @incident.priority == 'P1' ? 'bg-red-100 text-red-800' : 
+                           @incident.priority == 'P2' ? 'bg-orange-100 text-orange-800' :
+                           @incident.priority == 'P3' ? 'bg-yellow-100 text-yellow-800' :
+                           @incident.priority == 'P4' ? 'bg-green-100 text-green-800' :
+                           'bg-blue-100 text-blue-800' %>">
+              <%= @incident.priority %>
+            </span>
+          </dd>
+        </div>
+
+        <div class="sm:col-span-1">
+          <dt class="text-sm font-medium text-gray-500">Status</dt>
+          <dd class="mt-1 text-sm text-gray-900">
+            <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full
+                       <%= @incident.status == 'open' ? 'bg-green-100 text-green-800' : 'bg-gray-100 text-gray-800' %>">
+              <%= @incident.status %>
+            </span>
+          </dd>
+        </div>
+
+        <div class="sm:col-span-2">
+          <dt class="text-sm font-medium text-gray-500">Description</dt>
+          <dd class="mt-1 text-sm text-gray-900">
+            <%= @incident.description %>
+          </dd>
+        </div>
+      </dl>
+    </div>
+  </div>
+
+  <div class="mt-6 flex space-x-3">
+    <%= link_to "Back to Incidents", root_path, class: "bg-white py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50" %>
+    <%= link_to "Edit Incident", edit_incident_path(@incident), class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" %>
+    <%= button_to "Delete Incident", incident_path(@incident), 
+        method: :delete,
+        data: { confirm: "Are you sure?" },
+        class: "bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded" %>
+  </div>
+</div> 
